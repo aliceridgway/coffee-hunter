@@ -1,3 +1,5 @@
 django
 django-environ
 djangorestframework
+flake8
+black
