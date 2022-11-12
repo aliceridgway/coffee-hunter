@@ -34,3 +34,28 @@ class UserPermission(permissions.BasePermission):
             return request.user.is_staff
         else:
             return False
+
+
+class ProfilePermission(permissions.BasePermission):
+    def has_permission(self, request, view):
+
+        if not request.user.is_authenticated:
+            return False
+
+        elif view.action in ["retrieve", "update", "partial_update"]:
+            return True
+
+        elif view.action == "list":
+            return request.user.is_staff
+
+        else:
+            return False
+
+    def has_object_permission(self, request, view, obj):
+
+        if view.action == "retrieve":
+            return True
+        elif view.action in ["update", "partial_update"]:
+            return obj.user == request.user or request.user.is_staff
+        else:
+            return False

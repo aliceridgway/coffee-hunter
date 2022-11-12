@@ -4,3 +4,4 @@ djangorestframework
 djangorestframework-simplejwt
 flake8
 black
+pillow

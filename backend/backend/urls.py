@@ -8,7 +8,8 @@ from accounts import views as accounts_views
 from cafes import views as cafe_views
 
 router = routers.DefaultRouter()
-router.register(r"users", accounts_views.UserViewSet)
+router.register("users", accounts_views.UserViewSet)
+router.register("profiles", accounts_views.ProfileViewSet)
 router.register("tags", cafe_views.TagViewSet)
 router.register("cafes", cafe_views.CafeViewSet)
 

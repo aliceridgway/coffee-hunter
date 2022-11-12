@@ -33,6 +33,8 @@ mypy-extensions==0.4.3
     # via black
 pathspec==0.10.1
     # via black
+pillow==9.3.0
+    # via -r requirements.in
 platformdirs==2.5.3
     # via black
 pycodestyle==2.9.1
