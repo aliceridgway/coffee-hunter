@@ -33,7 +33,7 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractUser):
-    manager = CustomUserManager()
+    objects = CustomUserManager()
 
 
 class ProfileManager(models.Manager):
