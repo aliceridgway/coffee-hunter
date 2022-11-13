@@ -16,7 +16,15 @@ class CafeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Cafe
-        fields = ["id", "url", "name", "address", "website", "tags"]
+        fields = [
+            "id",
+            "url",
+            "name",
+            "address",
+            "website",
+            "tags",
+            "updated_at",
+        ]
 
 
 class ReviewSerializer(serializers.ModelSerializer):
@@ -30,7 +38,7 @@ class ReviewSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Review
-        fields = ["id", "title", "rating", "review", "cafe", "author"]
+        fields = ["id", "title", "rating", "review", "cafe", "author", "created_at"]
 
     def validate(self, attrs):
         request = self.context.get("request")

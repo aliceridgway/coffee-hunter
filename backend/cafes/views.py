@@ -31,8 +31,10 @@ class CafeViewSet(ModelViewSet):
         """
         Gets reviews for a single cafe.
         """
-        reviews = Review.objects.select_related("author", "author__profile").filter(
-            cafe_id=pk
+        reviews = (
+            Review.objects.select_related("author", "author__profile")
+            .filter(cafe_id=pk)
+            .order_by("-created_at")
         )
         page = self.paginate_queryset(reviews)
 
