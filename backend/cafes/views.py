@@ -34,8 +34,13 @@ class CafeViewSet(ModelViewSet):
         reviews = Review.objects.select_related("author", "author__profile").filter(
             cafe_id=pk
         )
-        serializer = serializers.ReviewSerializer(reviews, many=True)
+        page = self.paginate_queryset(reviews)
 
+        if page is not None:
+            serializer = serializers.ReviewSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = serializers.ReviewSerializer(reviews, many=True)
         return Response(serializer.data)
 
 
