@@ -15,7 +15,7 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
 
-        # Instance must have an attribute named `owner`.
+        # Instance must have an attribute named `owner`
         is_user = getattr(obj, "user", False)
         is_owner = getattr(obj, "owner", False)
 
