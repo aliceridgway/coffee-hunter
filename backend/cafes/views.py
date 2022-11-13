@@ -1,12 +1,10 @@
-from backend.permissions import IsOwnerOrReadOnly
+from backend.permissions import IsOwnerOrReadOnly, IsStaffOrReadOnly
 
 from cafes.models import Tag, Cafe, Review
 from cafes import permissions as cafe_permissions
 from cafes import serializers
 
 from rest_framework import mixins
-from rest_framework import permissions
-from rest_framework import generics
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
@@ -14,8 +12,8 @@ from rest_framework.viewsets import ModelViewSet, GenericViewSet
 
 class TagViewSet(ModelViewSet):
     serializer_class = serializers.TagSerializer
-    queryset = Tag.objects.all()
-    permission_classes = (permissions.IsAdminUser,)
+    queryset = Tag.objects.all().order_by("name")
+    permission_classes = (IsStaffOrReadOnly,)
 
 
 class CafeViewSet(ModelViewSet):
@@ -56,7 +54,11 @@ class ReviewViewSet(
     mixins.DestroyModelMixin,
 ):
     serializer_class = serializers.ReviewSerializer
-    queryset = Review.objects.select_related("author").all()
+    queryset = (
+        Review.objects.select_related("author", "author__profile")
+        .all()
+        .order_by("-created_at")
+    )
     permission_classes = (cafe_permissions.ReviewPermission,)
 
     def perform_create(self, serializer):

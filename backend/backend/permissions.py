@@ -20,3 +20,19 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
         is_owner = getattr(obj, "owner", False)
 
         return is_user or is_owner
+
+
+class IsStaffOrReadOnly(permissions.BasePermission):
+    def has_permission(self, request, view):
+
+        if view.action in ["list", "retrieve"]:
+            return True
+
+        return request.user.is_staff
+
+    def has_object_permission(self, request, view, obj):
+
+        if view.action == "retrieve":
+            return True
+
+        return request.user.is_staff

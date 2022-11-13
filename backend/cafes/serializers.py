@@ -5,7 +5,7 @@ from cafes import models
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Tag
-        fields = "__all__"
+        fields = ["id", "url", "name"]
 
 
 class CafeSerializer(serializers.ModelSerializer):
