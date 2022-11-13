@@ -32,7 +32,7 @@ class ReviewViewSet(
     mixins.DestroyModelMixin,
 ):
     serializer_class = serializers.ReviewSerializer
-    queryset = Review.objects.all()
+    queryset = Review.objects.select_related("author").all()
     permission_classes = (cafe_permissions.ReviewPermission,)
 
     def perform_create(self, serializer):

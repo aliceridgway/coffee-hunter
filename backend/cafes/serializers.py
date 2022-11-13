@@ -20,9 +20,17 @@ class CafeSerializer(serializers.ModelSerializer):
 
 
 class ReviewSerializer(serializers.ModelSerializer):
+    class AuthorSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = models.USER
+            fields = ["username", "profile"]
+            depth = 1
+
+    author = AuthorSerializer(read_only=True)
+
     class Meta:
         model = models.Review
-        fields = ["id", "title", "rating", "review", "cafe"]
+        fields = ["id", "title", "rating", "review", "cafe", "author"]
 
     def validate(self, attrs):
         request = self.context.get("request")
