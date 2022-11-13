@@ -1,5 +1,6 @@
 django
 django-environ
+django-filter
 djangorestframework
 djangorestframework-simplejwt
 flake8

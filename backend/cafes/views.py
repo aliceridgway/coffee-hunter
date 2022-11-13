@@ -23,6 +23,8 @@ class CafeViewSet(ModelViewSet):
     queryset = Cafe.objects.all()
     permission_classes = (IsOwnerOrReadOnly,)
 
+    filterset_fields = ["tags"]
+
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
