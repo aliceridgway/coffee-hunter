@@ -6,6 +6,9 @@ from cafes import serializers
 
 from rest_framework import mixins
 from rest_framework import permissions
+from rest_framework import generics
+from rest_framework.decorators import action
+from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 
 
@@ -22,6 +25,18 @@ class CafeViewSet(ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+    @action(detail=True, methods=["GET"])
+    def reviews(self, request, pk):
+        """
+        Gets reviews for a single cafe.
+        """
+        reviews = Review.objects.select_related("author", "author__profile").filter(
+            cafe_id=pk
+        )
+        serializer = serializers.ReviewSerializer(reviews, many=True)
+
+        return Response(serializer.data)
 
 
 class ReviewViewSet(

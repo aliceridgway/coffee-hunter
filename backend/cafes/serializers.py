@@ -16,7 +16,7 @@ class CafeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Cafe
-        fields = ["id", "name", "address", "website", "tags"]
+        fields = ["id", "url", "name", "address", "website", "tags"]
 
 
 class ReviewSerializer(serializers.ModelSerializer):
