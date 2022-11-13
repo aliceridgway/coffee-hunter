@@ -12,6 +12,7 @@ router.register("users", accounts_views.UserViewSet)
 router.register("profiles", accounts_views.ProfileViewSet)
 router.register("tags", cafe_views.TagViewSet)
 router.register("cafes", cafe_views.CafeViewSet)
+router.register("reviews", cafe_views.ReviewViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

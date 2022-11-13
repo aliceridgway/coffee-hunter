@@ -16,4 +16,7 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
             return True
 
         # Instance must have an attribute named `owner`.
-        return obj.user == request.user
+        is_user = getattr(obj, "user", False)
+        is_owner = getattr(obj, "owner", False)
+
+        return is_user or is_owner
