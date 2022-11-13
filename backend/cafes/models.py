@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth import get_user_model
 
 USER = get_user_model()
@@ -28,7 +28,9 @@ class Review(models.Model):
         to=USER, related_name="reviews", on_delete=models.CASCADE
     )
     cafe = models.ForeignKey(to=Cafe, related_name="reviews", on_delete=models.CASCADE)
-    rating = models.PositiveIntegerField()
+    rating = models.PositiveIntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(5)]
+    )
     title = models.CharField(max_length=255, blank=True, null=True)
     review = models.TextField(blank=True, null=True)
 
