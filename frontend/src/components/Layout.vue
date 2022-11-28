@@ -1,10 +1,18 @@
+<script>
+export default {
+  //
+};
+</script>
+
 <template>
   <v-app class="screen">
     <v-app-bar app shrink-on-scroll>
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-      <v-toolbar-title>Application</v-toolbar-title>
-
+      <router-link to="/"
+        ><v-toolbar-title>Coffee Hunter</v-toolbar-title></router-link
+      >
+      <router-link to="/register"><v-btn>Register</v-btn></router-link>
       <v-spacer></v-spacer>
 
       <v-btn icon>
@@ -18,11 +26,6 @@
   </v-app>
 </template>
 
-<script>
-export default {
-  //
-};
-</script>
 
 <style scoped>
 .screen {
